@@ -102,7 +102,8 @@ function main()
         ball.vx = -ball.vx;
     }
 
-    pad[i].move();
+    pad[0].move();
+    pad[1].move();
     ball.move();
 
     //draw the objects
