@@ -61,8 +61,7 @@ function main()
 
         if(pad[i].y < 0 + (pad[i].h/2) || pad[i].y > 800 - (pad[i].h/2)) {
             var mult1 = pad[i].y / Math.abs(pad[i].y)
-            var mult2 = mult1 * -1
-            pad[i].y = 400 + (400 * mult1) + ((pad[i].h / 2) * mult2)
+            pad[i].y = 400 + (400 * mult1) + ((pad[i].h / 2) * (mult1 * -1))
         }
 
         if(ball.y < 0 || ball.y > 800)
