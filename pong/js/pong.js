@@ -59,7 +59,7 @@ function main()
 
         pad[i].vy *= fy
 
-        if(pad[i].y < 0 + (pad[i].h/2) || pad[i].y > 800 - (pad[i].h/2)) {
+        if(pad[i].y < 0 - (pad[i].h/2) || pad[i].y > 800 + (pad[i].h/2)) {
             var mult1 = pad[i].y / Math.abs(pad[i].y)
             pad[i].y = 400 + (400 * mult1) + (pad[i].h / 2 * mult1)
         }
