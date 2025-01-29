@@ -107,8 +107,8 @@ function main()
     ball.move();
 
     //draw the objects
-    for (let i = 0; i < pad.length; i++) {
-        pad[0].draw()
-    }
+
+    pad[0].draw()
+    pad[1].draw()
     ball.draw()
 }
