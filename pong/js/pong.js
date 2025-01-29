@@ -64,10 +64,10 @@ function main()
             pad[i].y = (400 + (400 * mult1)) - ((pad[i].h / 2) * mult1)
         }
 
-        if(ball.y < 0 || ball.y > 800)
+        if(ball.y < 0 + (ball.h/2) || ball.y > 800 - (ball.h/2))
         {
-            var mult2 = pad[i].y / Math.abs(pad[i].y)
-            ball.y = 400 + (400 * mult2) + (ball.h / 2 * mult2)
+            var mult2 = (pad[i].y  + (ball.h/2)) / Math.abs(pad[i].y - (ball.h/2))
+            ball.y = 400 + (400 * mult2) - (ball.h / 2 * mult2)
             ball.vy = -ball.vy
         }
         
