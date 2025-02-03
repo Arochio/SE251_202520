@@ -46,34 +46,6 @@ function main()
     //erases the canvas
     ctx.clearRect(0,0,c.width,c.height)
 
-    for (let i = 0; i < upKeys.length; i++) {
-        if(keys[upKeys[i]])
-        {
-            pad[i].vy += -pad[i].force
-        }
-
-        if(keys[downKeys[i]])
-        {
-            pad[i].vy += pad[i].force
-        }
-
-        pad[i].vy *= fy
-
-        if(pad[i].y < 0 + (pad[i].h/2) || pad[i].y > 800 - (pad[i].h/2)) {
-            var mult1 = (pad[i].y - (pad[i].h/2)) / Math.abs(pad[i].y - (pad[i].h/2))
-            pad[i].y = (400 + (400 * mult1)) - ((pad[i].h / 2) * mult1)
-        }
-
-        if(ball.y < 0 + (ball.h/2) || ball.y > 800 - (ball.h/2))
-        {
-            var mult2 = (ball.y  - (ball.h/2)) / Math.abs(ball.y - (ball.h/2))
-            ball.y = (400 + (400 * mult2)) - ((ball.h / 2) * mult2)
-            ball.vy = -ball.vy
-        }
-        
-        scoreBoard[0].children[i].innerHTML = player[i].score;
-    }
-
     //ball collision 
     if(ball.x < 0)
     {
@@ -102,13 +74,37 @@ function main()
         ball.vx = -ball.vx;
     }
 
-    pad[0].move();
-    pad[1].move();
+    for (let i = 0; i < upKeys.length; i++) {
+        if(keys[upKeys[i]])
+        {
+            pad[i].vy += -pad[i].force
+        }
+
+        if(keys[downKeys[i]])
+        {
+            pad[i].vy += pad[i].force
+        }
+
+        pad[i].vy *= fy
+
+        if(pad[i].y < 0 + (pad[i].h/2) || pad[i].y > 800 - (pad[i].h/2)) {
+            var mult1 = (pad[i].y - (pad[i].h/2)) / Math.abs(pad[i].y - (pad[i].h/2))
+            pad[i].y = (400 + (400 * mult1)) - ((pad[i].h / 2) * mult1)
+        }
+
+        if(ball.y < 0 + (ball.h/2) || ball.y > 800 - (ball.h/2))
+        {
+            var mult2 = (ball.y  - (ball.h/2)) / Math.abs(ball.y - (ball.h/2))
+            ball.y = (400 + (400 * mult2)) - ((ball.h / 2) * mult2)
+            ball.vy = -ball.vy
+        }
+        
+        scoreBoard[0].children[i].innerHTML = player[i].score;
+        //draw the objects    
+        pad[i].move();
+        pad[i].draw();
+    }
+    
     ball.move();
-
-    //draw the objects
-
-    pad[0].draw()
-    pad[1].draw()
     ball.draw()
 }

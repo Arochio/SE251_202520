@@ -5,6 +5,6 @@ class Player {
         this.score = 0;
         this.highScore = 0;
         this.pad;
-        this.multiplier
+        this.multiplier;
     }
 }
