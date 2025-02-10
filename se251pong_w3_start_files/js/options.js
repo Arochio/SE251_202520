@@ -21,10 +21,12 @@ optionsBtn.children[0].addEventListener(`click`, (e) => {
 
 fillList = document.querySelectorAll(".fill");
 for (let i = 0; i < fillList.length; i++) {
-    fillList[i] = player[i].fill;
+    fillList[i].value = player[i].fill;
+    fillList[i].nextElementSibling.innerText = player[i].fill;
     fillList[i].parentElement.children[4].innerHTML = player[i].fill;
     fillList[i].addEventListener(`input`, (e)=> {
         player[i].fill = e.target.value;
+        fillList[i].nextElementSibling.innerText = player[i].fill;
         pad[i].fill = player[i].fill;
         fillList[i].parentElement.children[4].innerHTML = player[i].fill;
     })
@@ -32,12 +34,14 @@ for (let i = 0; i < fillList.length; i++) {
 
 strokeList = document.querySelectorAll(".stroke");
 for (let i = 0; i < strokeList.length; i++) {
-    strokeList[i] = player[i].stroke;
+    strokeList[i].value = player[i].stroke;
+    strokeList[i].nextElementSibling.innerText = player[i].stroke;
     strokeList[i].parentElement.children[7].innerHTML = player[i].stroke;
     strokeList[i].addEventListener(`input`, (e)=> {
         player[i].stroke = e.target.value;
         pad[i].stroke = player[i].stroke;
         strokeList[i].parentElement.children[7].innerHTML = player[i].stroke;
+        strokeList[i].nextElementSibling.innerText = player[i].stroke;
     })
 }
 
@@ -92,6 +96,7 @@ for (let i = 0; i < straightInputs.length; i++) {
 //change username
 username = document.querySelectorAll(`.username`);
 for (let i = 0; i < username.length; i++) {
+    username[i].value = "Player " + (i + 1)
     username[i].addEventListener(`focus`, (e)=> {
         currentState = `pause`;
     })
