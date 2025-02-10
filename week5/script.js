@@ -75,6 +75,7 @@ $(`#btnConfirm`).addEventListener(`click`, (e)=>{
         }
     });
 
+    checkIndex.reverse();
     checkIndex.forEach((value, i)=>{
         postArr[value].remove();
     });
