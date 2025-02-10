@@ -22,7 +22,7 @@ $(`#btnAdd`).addEventListener(`click`, (e)=>{
     post.appendChild(p);
     $(`#output`).appendChild(post);
 
-    let arr = Array.from($(`.post`)).map(value=>value.outerHTML)
+    let arr = Array.from(document.querySelectorAll(`.post`)).map(value=>value.outerHTML)
     let arrString = arr.join("")
     localStorage.setItem(`posts`, JSON.stringify(arrString));
 });
@@ -35,7 +35,7 @@ $(`#btnDel`).addEventListener(`click`, (e)=>{
     $(`#btnCancel`).removeAttribute(`disabled`)
     $(`#btnConfirm`).removeAttribute(`disabled`)
     let checkArr = [];
-    checkArr = $(`input[name="delCheck"]`);
+    checkArr = document.querySelectorAll(`input[name="delCheck"]`);
     checkArr.forEach((value, i)=>{
         value.removeAttribute(`hidden`)
     })
@@ -47,7 +47,7 @@ $(`#btnCancel`).addEventListener(`click`, (e)=>{
     $(`#btnConfirm`).disabled = `true`;
     $(`#btnDel`).removeAttribute(`disabled`)
     let checkArr = [];
-    checkArr = $(`input[name="delCheck"]`);
+    checkArr = document.querySelectorAll(`input[name="delCheck"]`);
     checkArr.forEach((value, i)=>{
         value.hidden = "true";
     });
@@ -55,7 +55,7 @@ $(`#btnCancel`).addEventListener(`click`, (e)=>{
 
 $(`#btnSel`).addEventListener(`click`, (e)=>{
     let checkArr = [];
-    checkArr = $(`input[name="delCheck"]`);
+    checkArr = document.querySelectorAll(`input[name="delCheck"]`);
     checkArr.forEach((value, i)=>{
         value.checked = "true";
     });
@@ -64,10 +64,10 @@ $(`#btnSel`).addEventListener(`click`, (e)=>{
 $(`#btnConfirm`).addEventListener(`click`, (e)=>{
     let checkArr = [];
     let checkIndex = [];
-    checkArr = $(`input[name="delCheck"]`);
+    checkArr = document.querySelectorAll(`input[name="delCheck"]`);
     var checkLength = checkArr.length
     for (let i = 0; i < checkLength; i++) {
-        if ($(`input[name="delCheck"]`)[i].checked) {
+        if (document.querySelectorAll(`input[name="delCheck"]`)[i].checked) {
             checkIndex.push(i)
         }
     }
@@ -75,7 +75,7 @@ $(`#btnConfirm`).addEventListener(`click`, (e)=>{
     checkIndex.reverse();
 
     let posts = [];
-    posts = $(`.post`);
+    posts = document.querySelectorAll(`.post`);
     for (let i = 0; i < checkIndex.length; i++) {
         posts[checkIndex[i]].remove();
     }
@@ -84,17 +84,21 @@ $(`#btnConfirm`).addEventListener(`click`, (e)=>{
     $(`#btnCancel`).setAttribute(`disabled`, `true`);
     $(`#btnConfirm`).setAttribute(`disabled`, `true`);
     $(`#btnDel`).removeAttribute(`disabled`);
-    checkArr = $(`input[name="delCheck"]`);
+    checkArr = document.querySelectorAll(`input[name="delCheck"]`);
     
     if (checkArr != undefined) {
         for (let i = 0; i < checkArr.length; i++) {
-            $(`input[name="delCheck"]`)[i].hidden = "true";    
+            document.querySelectorAll(`input[name="delCheck"]`)[i].hidden = "true";
         }
     }
-    localStorage.clear()
-    let arr = Array.from($(`.post`)).map(value=>value.outerHTML)
+    let arr = Array.from(document.querySelectorAll(`.post`)).map(value=>value.outerHTML)
     let arrString = arr.join("")
     localStorage.setItem(`posts`, JSON.stringify(arrString));
 })
 
-$(`#output`).innerHTML = JSON.parse(localStorage.getItem(`posts`))
+try {
+    $(`#output`).innerHTML = JSON.parse(localStorage.getItem(`posts`))
+}
+catch {
+    console.log("no local storage found. ")
+}
