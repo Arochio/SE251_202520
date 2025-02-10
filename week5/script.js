@@ -22,14 +22,12 @@ $(`#btnAdd`).addEventListener(`click`, (e)=>{
     post.appendChild(p);
     $(`#output`).appendChild(post);
 
-    var arr = Array.from($(`.post`)).map(value=>value.outerHTML)
-    var arrString = arr.join("")
+    let arr = Array.from($(`.post`)).map(value=>value.outerHTML)
+    let arrString = arr.join("")
     localStorage.setItem(`posts`, JSON.stringify(arrString));
 });
 
-console.log(JSON.parse(localStorage.getItem(`posts`)))
 
-$(`#output`).innerHTML = JSON.parse(localStorage.getItem(`posts`))
 
 $(`#btnDel`).addEventListener(`click`, (e)=>{
     e.target.disabled = `true`;
@@ -64,27 +62,39 @@ $(`#btnSel`).addEventListener(`click`, (e)=>{
 });
 
 $(`#btnConfirm`).addEventListener(`click`, (e)=>{
-    let checkIndex = [];
     let checkArr = [];
-    let postArr = [];
-    postArr = $(`.post`);
+    let checkIndex = [];
     checkArr = $(`input[name="delCheck"]`);
-    checkArr.forEach((value, i)=>{
-        if (value.checked == "true") {
-            checkIndex.push(i);
+    var checkLength = checkArr.length
+    for (let i = 0; i < checkLength; i++) {
+        if ($(`input[name="delCheck"]`)[i].checked) {
+            checkIndex.push(i)
         }
-    });
+    }
 
     checkIndex.reverse();
-    checkIndex.forEach((value, i)=>{
-        postArr[value].remove();
-    });
-    $(`#btnSel`).disabled = `true`;
-    $(`#btnCancel`).disabled = `true`;
-    $(`#btnConfirm`).disabled = `true`;
-    $(`#btnDel`).removeAttribute(`disabled`)
+
+    let posts = [];
+    posts = $(`.post`);
+    for (let i = 0; i < checkIndex.length; i++) {
+        posts[checkIndex[i]].remove();
+    }
+
+    $(`#btnSel`).setAttribute(`disabled`, `true`);
+    $(`#btnCancel`).setAttribute(`disabled`, `true`);
+    $(`#btnConfirm`).setAttribute(`disabled`, `true`);
+    $(`#btnDel`).removeAttribute(`disabled`);
     checkArr = $(`input[name="delCheck"]`);
-    checkArr.forEach((value, i)=>{
-        value.hidden = "true";
-    });
+    
+    if (checkArr != undefined) {
+        for (let i = 0; i < checkArr.length; i++) {
+            $(`input[name="delCheck"]`)[i].hidden = "true";    
+        }
+    }
+    localStorage.clear()
+    let arr = Array.from($(`.post`)).map(value=>value.outerHTML)
+    let arrString = arr.join("")
+    localStorage.setItem(`posts`, JSON.stringify(arrString));
 })
+
+$(`#output`).innerHTML = JSON.parse(localStorage.getItem(`posts`))
