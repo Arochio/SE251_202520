@@ -58,6 +58,8 @@ function validateForm() {
             else {
                 emailSpan.innerText = `Invalid email format.`;
                 emailSpan.parentElement.classList.add(`red`);
+                emailCSpan.innerText = `Invalid email format.`;
+                emailCSpan.parentElement.classList.add(`red`);
             }
         }
         else {
