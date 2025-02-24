@@ -61,9 +61,15 @@ function validateForm() {
             }
         }
         else {
+            emailSpan.innerText = `Email fields must match.`;
+            emailSpan.parentElement.classList.add(`red`);
             emailCSpan.innerText = `Email fields must match.`;
             emailCSpan.parentElement.classList.add(`red`);
         }
+    }
+    else {
+        emailSpan.innerText = `*`;
+        emailSpan.parentElement.classList.add(`red`);
     }
 
     if (document.forms["info"]["phone"].value != "") {
@@ -79,6 +85,10 @@ function validateForm() {
             phoneSpan.innerText = `Invalid phone format.`;
             phoneSpan.parentElement.classList.add(`red`);
         }
+    }
+    else {
+        phoneSpan.innerText = `*`;
+        phoneSpan.parentElement.classList.add(`red`);
     }
 
     if (fNameInput != null && lNameInput != null && emailInput != null && phoneInput != null) {
