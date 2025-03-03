@@ -46,6 +46,7 @@
 
         //query select all the buttons
         buttons = Array.from(document.querySelectorAll(".item button"));
+        
         //add event listeners to each button
             //send the index number of the button you selected to the `delete` route
             //the object you send could look like this {index:/*correct index number goes here*/}
@@ -69,7 +70,7 @@
                         "Content-type": "application/json; charset=UTF-8"
                     }
                 })
-
+                load();
             })
         });
         
