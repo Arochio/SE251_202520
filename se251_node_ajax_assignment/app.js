@@ -39,6 +39,7 @@ app.post('/jeep', async (req, res) => {
     var oldData =  await readFile(`./data/jeep.json`)
     var newData =  await JSON.parse(oldData)
     newData.push(req.body)
+    newData = newData.sort((a,b) => (b.year>a.year)?1:-1)
     const jsonString = JSON.stringify(newData);
     await fs.writeFile('./data/jeep.json', jsonString, err => {
       if (err) {
@@ -59,7 +60,7 @@ app.post('/delete', async (req, res) => {
 
   var oldData =  await readFile(`./data/jeep.json`);
   var newData =  await JSON.parse(oldData);
-  newData.pop(newData.indexOf(req.body));
+  newData.splice(req.body.index, 1);
   const jsonString = JSON.stringify(newData);
 
   await fs.writeFile('./data/jeep.json', jsonString, err => {
